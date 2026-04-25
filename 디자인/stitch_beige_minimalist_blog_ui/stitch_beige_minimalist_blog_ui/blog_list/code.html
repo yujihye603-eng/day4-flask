@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Be+Vietnam+Pro:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#cfc4c0",
+                        "secondary": "#655d5a",
+                        "surface-tint": "#77574d",
+                        "surface-container": "#efeeea",
+                        "primary-container": "#5d4037",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e4e2de",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dbdad6",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#e7bdb1",
+                        "outline-variant": "#d4c3be",
+                        "on-background": "#1b1c1a",
+                        "primary-fixed": "#ffdbd0",
+                        "surface": "#fbf9f5",
+                        "on-surface-variant": "#504441",
+                        "surface-container-high": "#eae8e4",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#d4ada1",
+                        "inverse-on-surface": "#f2f0ed",
+                        "primary": "#442a22",
+                        "on-tertiary-container": "#d2aea1",
+                        "surface-container-highest": "#e4e2de",
+                        "on-tertiary-fixed": "#2b160f",
+                        "inverse-surface": "#30312e",
+                        "on-error": "#ffffff",
+                        "background": "#fbf9f5",
+                        "surface-bright": "#fbf9f5",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffdbce",
+                        "tertiary": "#432b22",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#5d4037",
+                        "secondary-fixed": "#ece0dc",
+                        "surface-container-low": "#f5f3ef",
+                        "tertiary-container": "#5b4137",
+                        "on-primary-fixed": "#2c160e",
+                        "on-secondary-container": "#6b6360",
+                        "outline": "#827470",
+                        "on-secondary-fixed": "#201a18",
+                        "on-tertiary-fixed-variant": "#5b4137",
+                        "secondary-container": "#ece0dc",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1b1c1a",
+                        "on-secondary-fixed-variant": "#4c4542",
+                        "primary-fixed-dim": "#e7bdb1",
+                        "tertiary-fixed-dim": "#e4be2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "24px",
+                        "margin-mobile": "20px",
+                        "container-max": "1120px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "stack-lg": "48px",
+                        "section-gap": "80px",
+                        "stack-sm": "12px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "label-sm": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "h1": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h2": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .paper-layer {
+            box-shadow: 0 1px 3px rgba(93, 64, 55, 0.08), 0 1px 2px rgba(93, 64, 55, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-[#FDFCFB] dark:bg-stone-950 sticky top-0 z-40 border-b border-stone-200 dark:border-stone-800 shadow-[0_1px_2px_rgba(93,64,55,0.05)]">
+<div class="max-w-[1120px] mx-auto flex justify-between items-center px-6 h-16">
+<div class="flex items-center gap-8">
+<span class="text-xl font-semibold tracking-tighter text-[#5D4037] dark:text-stone-100 font-['Plus_Jakarta_Sans']">Journal</span>
+<nav class="hidden md:flex items-center gap-6 font-['Plus_Jakarta_Sans'] text-sm tracking-wide">
+<a class="text-[#5D4037] dark:text-stone-100 font-bold border-b-2 border-[#5D4037] pb-1" href="#">Feed</a>
+<a class="text-stone-400 dark:text-stone-500 hover:text-[#5D4037] hover:bg-stone-50 transition-all duration-300 px-2 py-1 rounded" href="#">Write</a>
+<a class="text-stone-400 dark:text-stone-500 hover:text-[#5D4037] hover:bg-stone-50 transition-all duration-300 px-2 py-1 rounded" href="#">Archive</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-[#5D4037] hover:bg-stone-50 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="p-2 text-[#5D4037] hover:bg-stone-50 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-[1120px] mx-auto px-margin-mobile md:px-gutter py-stack-lg lg:py-section-gap">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-stack-lg gap-stack-md">
+<div>
+<h1 class="font-h1 text-h1 text-primary mb-2">Morning Pages</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-xl">A sanctuary for your daily thoughts, reflections, and quiet observations of the world.</p>
+</div>
+<div class="flex gap-stack-sm">
+<button class="flex items-center gap-2 bg-primary text-on-primary px-8 py-3 rounded-xl font-medium paper-layer hover:opacity-90 transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+<span>Write New Post</span>
+</button>
+</div>
+</div>
+<!-- Featured / Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-section-gap">
+<!-- Large Featured Card -->
+<article class="md:col-span-8 group cursor-pointer">
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden border border-surface-variant paper-layer transition-transform duration-300 hover:-translate-y-1">
+<div class="h-[400px] w-full relative overflow-hidden">
+<img alt="Featured post image" class="w-full h-full object-cover transition-scale duration-500 group-hover:scale-105" data-alt="a minimalist workspace with a single ceramic mug and an open notebook on a textured wooden desk with soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDneUbFF3PHC7v_WgrLJp-nKNREoBt1rVYEOVggqaZZobHQtz1s9qvyu3025fx4M41EjvV0LbbQ19DwIOcbYenQPUDEk5iUQ7Niq35FmE9lJR4e-E39HX3n3lvxVzVcCs_SJgHwMKDx89PFsXQnM9Rjd_Kmh94ue_N2DmKw6QMUXRC58rCM30ek3WdoDRyBYC3eMG3-zW9RlZPGkEL8FqkObm_L9vyEx2qmqu0WWNZUcb44gAsLPd8ngDYrlOMXQemfpBdvR3KKNDA"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary/90 text-on-primary text-label-sm font-label-sm px-4 py-2 rounded-full backdrop-blur-sm">FEATURED</span>
+</div>
+</div>
+<div class="p-8">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-3 block">Philosophy</span>
+<h2 class="font-h2 text-h2 text-primary mb-4 group-hover:text-primary-container transition-colors">The Art of Quiet Productivity</h2>
+<p class="text-secondary font-body-md line-clamp-3 mb-6">In a world that prizes noise and speed, there is a profound strength in moving slowly and deliberately. This post explores how silence can be our most effective tool for deep work and creative breakthroughs.</p>
+<div class="flex items-center gap-2 text-secondary/60 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="schedule">schedule</span>
+<span>2 hours ago</span>
+<span class="mx-2">•</span>
+<span>6 min read</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Secondary Vertical Posts -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<article class="bg-surface-container-lowest p-6 rounded-xl border border-surface-variant paper-layer group cursor-pointer transition-all hover:bg-surface">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-2 block">Travel</span>
+<h3 class="font-h3 text-h3 text-primary mb-3 leading-tight group-hover:text-primary-container">Notes from the Northern Coast</h3>
+<div class="flex items-center gap-2 text-secondary/60 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="schedule">schedule</span>
+<span>5 hours ago</span>
+</div>
+</article>
+<article class="bg-surface-container-lowest p-6 rounded-xl border border-surface-variant paper-layer group cursor-pointer transition-all hover:bg-surface">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-2 block">Curation</span>
+<h3 class="font-h3 text-h3 text-primary mb-3 leading-tight group-hover:text-primary-container">Building a Personal Library</h3>
+<div class="flex items-center gap-2 text-secondary/60 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="schedule">schedule</span>
+<span>8 hours ago</span>
+</div>
+</article>
+<article class="bg-surface-container-lowest p-6 rounded-xl border border-surface-variant paper-layer group cursor-pointer transition-all hover:bg-surface">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-2 block">Design</span>
+<h3 class="font-h3 text-h3 text-primary mb-3 leading-tight group-hover:text-primary-container">Typography as Architecture</h3>
+<div class="flex items-center gap-2 text-secondary/60 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="schedule">schedule</span>
+<span>Yesterday</span>
+</div>
+</article>
+</div>
+</div>
+<!-- Secondary Feed Section -->
+<div class="border-t border-surface-variant pt-stack-lg">
+<div class="flex items-center justify-between mb-stack-md">
+<h2 class="font-h3 text-h3 text-primary">Recent Entries</h2>
+<div class="flex gap-2">
+<span class="bg-surface-container-high px-4 py-1.5 rounded-full text-label-sm font-label-sm text-primary">All</span>
+<span class="bg-transparent px-4 py-1.5 rounded-full text-label-sm font-label-sm text-secondary hover:bg-surface-container transition-colors cursor-pointer">Drafts</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Post Card 1 -->
+<article class="flex flex-col gap-4 group cursor-pointer">
+<div class="aspect-[16/9] rounded-xl overflow-hidden bg-surface-container">
+<img alt="Books stack" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="a stack of old linen bound books on a neutral stone surface with gentle shadows cast by a nearby window" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrfVp6KDD4op6W7dEjS9RP93amHRv98hAyQi80P2_rS8SDHRRxST1xf-oH1Qcq49bgvWgsVKlwlXiByLFK4UVejmpLgQHAY8o2_K4Mp4BVajOI8VyS3-g5z660IYz3PiRshexdCp1uhIoapL3sKw4Di2bymbIVe9H-zhHPjYcHLp-f9qu5C5HWxNx4qq1E_S0xO9bxpwEARhjBACdeBTWY5QjQq937D8xJO13sgxaOPmSbfDVrsU-xtxHblBFoxaijafOKvMGTnQ4"/>
+</div>
+<div>
+<div class="flex items-center gap-2 text-secondary/60 font-label-sm text-label-sm mb-2">
+<span>12 Oct</span>
+<span class="mx-1">•</span>
+<span>Journaling</span>
+</div>
+<h4 class="font-h3 text-h3 text-primary group-hover:text-primary-container transition-colors mb-2">The Ritual of Ink and Paper</h4>
+<p class="text-secondary line-clamp-2 font-body-md">Reflecting on why tactile experiences remain essential in a digital-first era of creation.</p>
+</div>
+</article>
+<!-- Post Card 2 -->
+<article class="flex flex-col gap-4 group cursor-pointer">
+<div class="aspect-[16/9] rounded-xl overflow-hidden bg-surface-container">
+<img alt="Mountains" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="hazy blue mountains at dawn with layers of mist in the valleys and a pale grey sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwC_ARuvh0bZr9ORm9YNvIn6LwuOfin9FoUCz4SreDWGCUo-Tqmis9o_x_YDbMvCp6I6f_BakSIyHHOi0OpPbarrfo2KzZ0fNZLvolzekXzIj_nkzguTWQ935ZPfA-c5zsv-3pAn1hAJVwkV7Z4CAvfLsbwB0A3XVxV8smzyJcj0TKYXVvwAcSukBK7Qvonny4E5-4QKVDF8vIDiXIX_7cD8pUgOSas8eIqbd7JG9bX8VZWqNHD-IFvmHri8N2QlkQpT__PnYBO0s"/>
+</div>
+<div>
+<div class="flex items-center gap-2 text-secondary/60 font-label-sm text-label-sm mb-2">
+<span>10 Oct</span>
+<span class="mx-1">•</span>
+<span>Photography</span>
+</div>
+<h4 class="font-h3 text-h3 text-primary group-hover:text-primary-container transition-colors mb-2">Capturing the Haze</h4>
+<p class="text-secondary line-clamp-2 font-body-md">Learning to photograph what is felt rather than just what is seen through the lens.</p>
+</div>
+</article>
+<!-- Post Card 3 -->
+<article class="flex flex-col gap-4 group cursor-pointer">
+<div class="aspect-[16/9] rounded-xl overflow-hidden bg-surface-container">
+<img alt="Coffee" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="a ceramic cup of black coffee on a simple white saucer with a silver spoon and a single ray of light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN1BYH4wpmVe7Kiz9c_RjZLkAauJgIPpKakVNSlsDDSPbDVNbDpPHGK08zVaXZFk8gRKza3P55D0Plnq1-i-iGXdvmm8O__Ga3t48mRxtGxAPbmt4F3ZnSYCTnIvU_EgDkhxngR3UNYEn69ffW5TufrWkLEOOMM47TxYSt3aOgO-U61kuSP7wruyAEbMmsuF7R7rALMoJKDnFiHNxNX0Q-rJvrN4HILnB80AE0hg66NuQAD8PW1WRZBtc5jL6LJo6QrVYp4Xf7yP0"/>
+</div>
+<div>
+<div class="flex items-center gap-2 text-secondary/60 font-label-sm text-label-sm mb-2">
+<span>08 Oct</span>
+<span class="mx-1">•</span>
+<span>Routine</span>
+</div>
+<h4 class="font-h3 text-h3 text-primary group-hover:text-primary-container transition-colors mb-2">The First Hour</h4>
+<p class="text-secondary line-clamp-2 font-body-md">Protecting the early morning from the encroachment of notifications and world events.</p>
+</div>
+</article>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (Mobile Primary) -->
+<button class="md:hidden fixed right-6 bottom-24 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center z-40 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+</button>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 border-t border-stone-200 dark:border-stone-800 bg-[#FDFCFB]/90 dark:bg-stone-950/90 backdrop-blur-md flex justify-around items-center h-16 px-4 pb-safe">
+<a class="flex flex-col items-center justify-center text-[#5D4037] dark:text-stone-100 bg-stone-100 dark:bg-stone-900 rounded-md px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Read</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:text-[#5D4037] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Write</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:text-[#5D4037] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Profile</span>
+</a>
+</nav>
+<!-- Simple Footer -->
+<footer class="max-w-[1120px] mx-auto px-margin-mobile md:px-gutter py-stack-lg border-t border-surface-variant mt-section-gap mb-20 md:mb-0">
+<div class="flex flex-col md:flex-row justify-between items-center gap-stack-md text-secondary/60 text-label-sm font-label-sm">
+<p>© 2023 Journal Publishing. All thoughts are your own.</p>
+<div class="flex gap-8">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Thought</a>
+<a class="hover:text-primary transition-colors" href="#">RSS Feed</a>
+</div>
+</div>
+</footer>
+</body></html>

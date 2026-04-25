@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#cfc4c0",
+                    "secondary": "#655d5a",
+                    "surface-tint": "#77574d",
+                    "surface-container": "#efeeea",
+                    "primary-container": "#5d4037",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#e4e2de",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#dbdad6",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#e7bdb1",
+                    "outline-variant": "#d4c3be",
+                    "on-background": "#1b1c1a",
+                    "primary-fixed": "#ffdbd0",
+                    "surface": "#fbf9f5",
+                    "on-surface-variant": "#504441",
+                    "surface-container-high": "#eae8e4",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#d4ada1",
+                    "inverse-on-surface": "#f2f0ed",
+                    "primary": "#442a22",
+                    "on-tertiary-container": "#d2aea1",
+                    "surface-container-highest": "#e4e2de",
+                    "on-tertiary-fixed": "#2b160f",
+                    "inverse-surface": "#30312e",
+                    "on-error": "#ffffff",
+                    "background": "#fbf9f5",
+                    "surface-bright": "#fbf9f5",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#ffdbce",
+                    "tertiary": "#432b22",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed-variant": "#5d4037",
+                    "secondary-fixed": "#ece0dc",
+                    "surface-container-low": "#f5f3ef",
+                    "tertiary-container": "#5b4137",
+                    "on-primary-fixed": "#2c160e",
+                    "on-secondary-container": "#6b6360",
+                    "outline": "#827470",
+                    "on-secondary-fixed": "#201a18",
+                    "on-tertiary-fixed-variant": "#5b4137",
+                    "secondary-container": "#ece0dc",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#1b1c1a",
+                    "on-secondary-fixed-variant": "#4c4542",
+                    "primary-fixed-dim": "#e7bdb1",
+                    "tertiary-fixed-dim": "#e4be2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-md": "24px",
+                    "margin-mobile": "20px",
+                    "container-max": "1120px",
+                    "gutter": "24px",
+                    "base": "8px",
+                    "stack-lg": "48px",
+                    "section-gap": "80px",
+                    "stack-sm": "12px"
+            },
+            "fontFamily": {
+                    "h3": ["Plus Jakarta Sans"],
+                    "h1": ["Plus Jakarta Sans"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "h2": ["Plus Jakarta Sans"],
+                    "label-sm": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "h1": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "h2": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        body {
+            background-color: #fbf9f5;
+        }
+        .content-shadow {
+            box-shadow: 0 1px 3px rgba(93, 64, 55, 0.03), 0 1px 2px rgba(93, 64, 55, 0.02);
+        }
+    </style>
+</head>
+<body class="min-h-screen text-on-surface bg-background">
+<!-- TopAppBar Section -->
+<nav class="sticky top-0 z-50 bg-[#FDFCFB] dark:bg-stone-950 border-b border-stone-200 dark:border-stone-800 shadow-[0_1px_2px_rgba(93,64,55,0.05)] transition-all duration-300">
+<div class="max-w-[1120px] mx-auto flex justify-between items-center px-6 h-16">
+<div class="flex items-center gap-8">
+<span class="text-xl font-semibold tracking-tighter text-[#5D4037] dark:text-stone-100 font-['Plus_Jakarta_Sans']">Journal</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-stone-400 dark:text-stone-500 hover:text-[#5D4037] font-['Plus_Jakarta_Sans'] text-sm tracking-wide transition-all duration-300" href="#">Feed</a>
+<a class="text-stone-400 dark:text-stone-500 hover:text-[#5D4037] font-['Plus_Jakarta_Sans'] text-sm tracking-wide transition-all duration-300" href="#">Write</a>
+<a class="text-stone-400 dark:text-stone-500 hover:text-[#5D4037] font-['Plus_Jakarta_Sans'] text-sm tracking-wide transition-all duration-300" href="#">Archive</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-[#5D4037] dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-stone-900 transition-all rounded-full active:opacity-80">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="p-2 text-[#5D4037] dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-stone-900 transition-all rounded-full active:opacity-80">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="max-w-[800px] mx-auto px-margin-mobile md:px-gutter py-section-gap">
+<!-- Post Header -->
+<header class="mb-stack-lg">
+<div class="flex items-center gap-3 mb-stack-md">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container font-label-sm text-label-sm rounded-full">Philosophy</span>
+<span class="text-outline font-label-sm text-label-sm">• 8 min read</span>
+</div>
+<h1 class="font-h1 text-h1 text-primary mb-stack-md">The Art of Deliberate Living: Finding Quiet in a Loud World</h1>
+<div class="flex items-center gap-4 py-stack-md border-b border-surface-variant">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="softly lit portrait of a woman with a gentle expression and warm background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0a0WVOeHRXASv-OcnKfZVgPiWIg35SMQP40kYEagV0V0zswU3v50kNYGwWFqu8yuyGHYrOoWn8H84G5oK9l7ZQifHcc3O_sy7Eo9RgSKvN4g1az7rMTZS-jpXoJl-slSHTfvZiYtMebURFsaF3WMM2U2IqZCizaK8Ve2KzO6hVR9Qzj_Jf-EgQNFpk2mt02Oa0QGKE6Mzr6ezrJpkTscLPJqm7sNOT8yFSw3SzXjWX_WRpR96MmSxDhCkpTyUIPeWSeXR5tj4cIs"/>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface font-semibold">Elena Vance</p>
+<p class="font-label-sm text-label-sm text-outline">Published on Oct 24, 2023</p>
+</div>
+</div>
+</header>
+<!-- Post Hero Image (Asymmetric Placement) -->
+<div class="w-full h-[450px] mb-section-gap rounded-xl overflow-hidden content-shadow">
+<img class="w-full h-full object-cover" data-alt="overhead view of a clean desk with a laptop, a ceramic mug, and a single green leaf in a vase, warm natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKOAKcx_4pOCygAZujQt3tOvK3BJ9af3m6OJT90PscaRx53QHOjvh-1Tt1UNRZRAH41YlwniuOjEeLCMk3CzoEb6TYdCQGcZVpIfv63DVkzbNkFrIBHu4V8b8rEUWf7WAppH-OZJXpZy769SG5lLZE3nSEelNFxwU5nY9DC1BqFNKAsFujSM645YNsbL4qHFaKuxASA6uL0d79J6z4Qo8jxermiTwIrLif4Eq7SGI8k376nbppraTAO9xY7-84CyFXScVbo2FiV3U"/>
+</div>
+<!-- Post Body -->
+<article class="prose prose-stone max-w-none">
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-stack-md leading-relaxed">
+                In an era defined by constant notifications and the relentless push for productivity, the concept of "deliberate living" has transformed from a luxury into a necessity. It is the practice of intentional choice—deciding not just what we do, but how we inhabit the space between actions.
+            </p>
+<h2 class="font-h2 text-h2 text-primary mt-stack-lg mb-stack-md">The Texture of Silence</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-md">
+                True silence is rarely about the absence of noise. Rather, it is about the presence of focus. When we strip away the peripheral distractions of modern life, we aren't left with nothing; we are left with the core of our own thoughts. This "tactile" quality of solitude is where creativity begins to breathe.
+            </p>
+<blockquote class="my-stack-lg border-l-4 border-primary-fixed-dim pl-6 py-2 italic font-body-lg text-primary">
+                "Simplicity is not the absence of complexity, but the mastery of it."
+            </blockquote>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-md">
+                We often mistake busyness for progress. The quiet professional knows better. They understand that a single hour of deep, undisturbed work is worth more than a day spent reactive to the whims of an inbox. This is the philosophy of the journal: a place for slow thought in a fast world.
+            </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter my-stack-lg">
+<div class="aspect-square rounded-xl overflow-hidden content-shadow">
+<img class="w-full h-full object-cover" data-alt="close up of a fountain pen on textured cream paper with elegant handwriting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX64xzSP17ifPw8sY79KrDZtc_nhj9wR_c4x1HW_xieaRqfzSJ5TcfIkYWA1ahmYinAefVjg-ysmlqhOh8eXjJ5fHnLAWZvrgXVl_-KiEiDU3PLOBoU4FYmMpzX00E61lTvf5f9kheQXS-Usuza3rlbE4OFmBiJ0sn2ZHkHSASs6qv_St2eLlEqsxq40t4FQFV0wasNpT2eRadNMsVITfEg0lkfoGvOVDzgGzYgnPjXj-FRkNPcXDhRVex1xy0CoufEYOT7HzWuMY"/>
+</div>
+<div class="flex flex-col justify-center p-stack-md bg-surface-container-low rounded-xl">
+<h3 class="font-h3 text-h3 text-primary mb-stack-sm">The Ritual of Writing</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Taking the time to translate internal static into external sentences is a grounding exercise. It forces a rhythm upon the mind that digital mediums often bypass.
+                    </p>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-lg">
+                As we move forward, let us reclaim the margins of our days. Let us choose the organic over the clinical, the focused over the fragmented. In the end, our lives are the sum of where we directed our attention.
+            </p>
+</article>
+<!-- Footer Actions Component -->
+<div class="mt-section-gap pt-stack-lg border-t border-surface-variant flex flex-col sm:flex-row items-center justify-between gap-stack-md">
+<button class="w-full sm:w-auto px-8 h-12 flex items-center justify-center gap-2 border border-outline text-primary font-label-sm text-label-sm rounded-lg hover:bg-surface-container transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_back">arrow_back</span>
+                Back to List
+            </button>
+<div class="flex w-full sm:w-auto items-center gap-stack-sm">
+<button class="flex-1 sm:flex-none px-8 h-12 flex items-center justify-center gap-2 bg-primary text-on-primary font-label-sm text-label-sm rounded-lg hover:opacity-90 transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[20px]" data-icon="edit">edit</span>
+                    Edit Post
+                </button>
+<button class="flex-1 sm:flex-none px-8 h-12 flex items-center justify-center gap-2 border border-error/20 text-error font-label-sm text-label-sm rounded-lg hover:bg-error/5 transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+                    Delete
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar Section (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-[#FDFCFB]/90 dark:bg-stone-950/90 backdrop-blur-md border-t border-stone-200 dark:border-stone-800">
+<div class="flex justify-around items-center h-16 px-4 pb-safe">
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:text-[#5D4037] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Read</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:text-[#5D4037] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Write</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:text-[#5D4037] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Profile</span>
+</a>
+</div>
+</nav>
+<!-- Spacer for Bottom Nav on Mobile -->
+<div class="h-20 md:hidden"></div>
+</body></html>
