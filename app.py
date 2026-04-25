@@ -4,7 +4,9 @@ from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 
 app = Flask(__name__)
-DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "board.db")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.environ.get("RENDER", BASE_DIR)
+DB_PATH = os.path.join(DATA_DIR, "board.db")
 
 
 def get_db():
@@ -107,4 +109,4 @@ with app.app_context():
     init_db()
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=int(os.environ.get("PORT", 5000)))
