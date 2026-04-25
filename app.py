@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 
 app = Flask(__name__)
-DB_PATH = os.path.join(app.root_path, "board.db")
+DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "board.db")
 
 
 def get_db():
@@ -66,6 +66,39 @@ def post_detail(post_id):
     if post is None:
         return redirect(url_for("post_list"))
     return render_template("post_detail.html", post=post)
+
+
+@app.route("/post/<int:post_id>/edit", methods=["GET", "POST"])
+def edit_post(post_id):
+    conn = get_db()
+    post = conn.execute(
+        "SELECT * FROM posts WHERE id = ?", (post_id,)
+    ).fetchone()
+    conn.close()
+    if post is None:
+        return redirect(url_for("post_list"))
+    if request.method == "POST":
+        title = request.form.get("title", "").strip()
+        content = request.form.get("content", "").strip()
+        if title and content:
+            conn = get_db()
+            conn.execute(
+                "UPDATE posts SET title = ?, content = ? WHERE id = ?",
+                (title, content, post_id),
+            )
+            conn.commit()
+            conn.close()
+            return redirect(url_for("post_detail", post_id=post_id))
+    return render_template("write_post.html", post=post)
+
+
+@app.route("/post/<int:post_id>/delete", methods=["POST"])
+def delete_post(post_id):
+    conn = get_db()
+    conn.execute("DELETE FROM posts WHERE id = ?", (post_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for("post_list"))
 
 
 # ── Init ────────────────────────────────────────────────────────────

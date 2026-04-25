@@ -90,12 +90,12 @@
             <div class="flex gap-4">
                 <span class="flex items-center gap-2 text-secondary text-label-sm font-label-sm">
                     <span class="material-symbols-outlined text-[18px]" data-icon="edit_note">edit_note</span>
-                    New Post
+                    {% if post %}Edit Post{% else %}New Post{% endif %}
                 </span>
             </div>
         </div>
 
-        <form method="POST" action="{{ url_for('write_post') }}" class="flex flex-col gap-stack-md">
+        <form method="POST" action="{% if post %}{{ url_for('edit_post', post_id=post['id']) }}{% else %}{{ url_for('write_post') }}{% endif %}" class="flex flex-col gap-stack-md">
             <!-- Title Input -->
             <div class="group">
                 <input
@@ -105,6 +105,7 @@
                     type="text"
                     name="title"
                     required
+                    {% if post %}value="{{ post['title'] }}"{% endif %}
                 />
                 <div class="h-px bg-surface-variant w-0 group-focus-within:w-full transition-all duration-500"></div>
             </div>
@@ -117,7 +118,7 @@
                     rows="15"
                     name="content"
                     required
-                ></textarea>
+                >{% if post %}{{ post['content'] }}{% endif %}</textarea>
             </div>
 
             <!-- Submission Bar -->
@@ -127,7 +128,7 @@
                         Cancel
                     </a>
                     <button class="bg-primary text-on-primary px-8 py-3 rounded-full shadow-lg hover:bg-primary/90 active:scale-95 transition-all font-h3 text-body-md" type="submit">
-                        Publish Post
+                        {% if post %}Update Post{% else %}Publish Post{% endif %}
                     </button>
                 </div>
             </div>
