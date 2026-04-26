@@ -104,11 +104,40 @@
         </div>
     </div>
 
+    <!-- Search & Sort -->
+    <div class="border-t border-surface-variant pt-stack-lg mb-stack-lg">
+        <form method="get" action="{{ url_for('post_list') }}" id="searchForm" class="flex flex-wrap gap-3 items-center">
+            <div class="flex gap-3 flex-1 min-w-0 max-w-xl">
+                <input type="text" name="q" value="{{ query|default('') }}"
+                       placeholder="제목 또는 내용으로 검색..."
+                       class="flex-1 min-w-0 px-4 py-2.5 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md placeholder:text-secondary/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all">
+                <button type="submit"
+                        class="flex items-center gap-2 bg-primary text-on-primary px-6 py-2.5 rounded-xl font-medium paper-layer hover:opacity-90 transition-all active:scale-95">
+                    <span class="material-symbols-outlined text-lg">search</span>
+                    검색
+                </button>
+                {% if query %}
+                <a href="{{ url_for('post_list') }}"
+                   class="flex items-center gap-1 px-4 py-2.5 rounded-xl font-medium bg-surface-container text-primary hover:bg-surface-variant transition-all">
+                    전체보기
+                </a>
+                {% endif %}
+            </div>
+            <select name="sort" onchange="this.form.submit()"
+                    class="px-4 py-2.5 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all cursor-pointer">
+                <option value="latest" {% if sort == 'latest' %}selected{% endif %}>최신순</option>
+                <option value="oldest" {% if sort == 'oldest' %}selected{% endif %}>오래된순</option>
+                <option value="title" {% if sort == 'title' %}selected{% endif %}>제목순 (가나다)</option>
+            </select>
+            <input type="hidden" name="page" value="1">
+        </form>
+    </div>
+
     <!-- Recent Entries -->
-    <div class="border-t border-surface-variant pt-stack-lg">
+    <div>
         <div class="flex items-center justify-between mb-stack-md">
-            <h2 class="font-h3 text-h3 text-primary">Recent Entries</h2>
-            <span class="bg-surface-container-high px-4 py-1.5 rounded-full text-label-sm font-label-sm text-primary">All</span>
+            <h2 class="font-h3 text-h3 text-primary">{% if query %}"{{ query }}" 검색 결과{% else %}Recent Entries{% endif %}</h2>
+            <span class="bg-surface-container-high px-4 py-1.5 rounded-full text-label-sm font-label-sm text-primary">{{ posts|length if posts else 0 }}건</span>
         </div>
 
         {% if posts %}
@@ -132,15 +161,41 @@
         </div>
         {% else %}
         <div class="text-center py-20">
-            <span class="material-symbols-outlined text-6xl text-surface-variant mb-4 block">edit_note</span>
-            <p class="text-secondary font-body-lg mb-6">No posts yet. Start writing your first page.</p>
+            <span class="material-symbols-outlined text-6xl text-surface-variant mb-4 block">{% if query %}search_off{% else %}edit_note{% endif %}</span>
+            <p class="text-secondary font-body-lg mb-6">{% if query %}"{{ query }}" 검색 결과가 없습니다{% else %}No posts yet. Start writing your first page.{% endif %}</p>
+            {% if not query %}
             <a href="{{ url_for('write_post') }}" class="inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-3 rounded-xl font-medium paper-layer hover:opacity-90 transition-all">
                 <span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
                 <span>Write New Post</span>
             </a>
+            {% endif %}
         </div>
         {% endif %}
     </div>
+
+    <!-- Pagination -->
+    {% if total_pages > 1 %}
+    <div class="flex items-center justify-center gap-4 mt-stack-lg pb-8">
+        {% set qp = {} %}
+        {% if query %}{% set _ = qp.update({'q': query}) %}{% endif %}
+        {% if sort and sort != 'latest' %}{% set _ = qp.update({'sort': sort}) %}{% endif %}
+        <a href="{{ url_for('post_list', page=page-1, **qp) if page > 1 else '#' }}"
+           class="flex items-center gap-1 px-5 py-2.5 rounded-xl font-medium transition-all
+                  {% if page <= 1 %}bg-surface-container text-secondary/30 cursor-not-allowed pointer-events-none
+                  {% else %}bg-surface-container text-primary hover:bg-surface-variant active:scale-95{% endif %}">
+            <span class="material-symbols-outlined text-lg">chevron_left</span>
+            이전
+        </a>
+        <span class="text-secondary font-body-md">{{ page }} / {{ total_pages }}</span>
+        <a href="{{ url_for('post_list', page=page+1, **qp) if page < total_pages else '#' }}"
+           class="flex items-center gap-1 px-5 py-2.5 rounded-xl font-medium transition-all
+                  {% if page >= total_pages %}bg-surface-container text-secondary/30 cursor-not-allowed pointer-events-none
+                  {% else %}bg-surface-container text-primary hover:bg-surface-variant active:scale-95{% endif %}">
+            다음
+            <span class="material-symbols-outlined text-lg">chevron_right</span>
+        </a>
+    </div>
+    {% endif %}
 </main>
 
 <!-- Footer -->

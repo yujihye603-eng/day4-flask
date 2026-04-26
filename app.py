@@ -29,14 +29,58 @@ def init_db():
 
 # ── Routes ──────────────────────────────────────────────────────────
 
+PER_PAGE = 10
+
+
+SORT_MAP = {
+    "latest": "created_at DESC",
+    "oldest": "created_at ASC",
+    "title": "title ASC",
+}
+
+
 @app.route("/")
 def post_list():
+    page = request.args.get("page", 1, type=int)
+    query = request.args.get("q", "").strip()
+    sort = request.args.get("sort", "latest")
+    order_by = SORT_MAP.get(sort, "created_at DESC")
     conn = get_db()
-    posts = conn.execute(
-        "SELECT * FROM posts ORDER BY created_at DESC"
-    ).fetchall()
+
+    if query:
+        like = f"%{query}%"
+        total = conn.execute(
+            "SELECT COUNT(*) FROM posts WHERE title LIKE ? OR content LIKE ?",
+            (like, like),
+        ).fetchone()[0]
+    else:
+        total = conn.execute("SELECT COUNT(*) FROM posts").fetchone()[0]
+
+    total_pages = max(1, (total + PER_PAGE - 1) // PER_PAGE)
+    page = max(1, min(page, total_pages))
+    offset = (page - 1) * PER_PAGE
+
+    if query:
+        like = f"%{query}%"
+        posts = conn.execute(
+            f"SELECT * FROM posts WHERE title LIKE ? OR content LIKE ? ORDER BY {order_by} LIMIT ? OFFSET ?",
+            (like, like, PER_PAGE, offset),
+        ).fetchall()
+    else:
+        posts = conn.execute(
+            f"SELECT * FROM posts ORDER BY {order_by} LIMIT ? OFFSET ?",
+            (PER_PAGE, offset),
+        ).fetchall()
+
     conn.close()
-    return render_template("blog_list.html", posts=posts)
+    return render_template(
+        "blog_list.html",
+        posts=posts,
+        page=page,
+        total_pages=total_pages,
+        query=query,
+        sort=sort,
+    )
 
 
 @app.route("/write", methods=["GET", "POST"])
