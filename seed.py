@@ -21,9 +21,33 @@ def get_conn():
     return conn
 
 
+def init_db(conn):
+    ph = "%s" if PG else "?"
+    if PG:
+        conn.execute(f"""
+            CREATE TABLE IF NOT EXISTS posts (
+                id SERIAL PRIMARY KEY,
+                title TEXT NOT NULL,
+                content TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT (NOW() AT TIME ZONE 'Asia/Seoul')
+            )
+        """)
+    else:
+        conn.execute(f"""
+            CREATE TABLE IF NOT EXISTS posts (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT NOT NULL,
+                content TEXT NOT NULL,
+                created_at DATETIME DEFAULT (datetime('now', 'localtime'))
+            )
+        """)
+    conn.commit()
+
+
 def seed():
     articles = fetch_news(10)
     conn = get_conn()
+    init_db(conn)
     cur = conn.cursor()
     ph = "%s" if PG else "?"
 
