@@ -1,13 +1,23 @@
 import os
-from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
+import psycopg2
+import psycopg2.extras
 
 app = Flask(__name__)
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "board.db")
+
+PG = bool(DATABASE_URL)
+PH = "%s" if PG else "?"
 
 
 def get_db():
+    if PG:
+        conn = psycopg2.connect(DATABASE_URL, sslmode="require")
+        conn.autocommit = False
+        return conn
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
@@ -15,22 +25,53 @@ def get_db():
 
 def init_db():
     conn = get_db()
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS posts (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT NOT NULL,
-            content TEXT NOT NULL,
-            created_at DATETIME DEFAULT (datetime('now', 'localtime'))
-        )
-    """)
+    if PG:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS posts (
+                id SERIAL PRIMARY KEY,
+                title TEXT NOT NULL,
+                content TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT (NOW() AT TIME ZONE 'Asia/Seoul')
+            )
+        """)
+    else:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS posts (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT NOT NULL,
+                content TEXT NOT NULL,
+                created_at DATETIME DEFAULT (datetime('now', 'localtime'))
+            )
+        """)
     conn.commit()
     conn.close()
+
+
+def query_all(conn, sql, params=()):
+    if PG:
+        cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+        cur.execute(sql, params)
+        return [dict(r) for r in cur.fetchall()]
+    cur = conn.execute(sql, params)
+    return cur.fetchall()
+
+
+def query_one(conn, sql, params=()):
+    if PG:
+        cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+        cur.execute(sql, params)
+        row = cur.fetchone()
+        return dict(row) if row else None
+    return conn.execute(sql, params).fetchone()
+
+
+def execute(conn, sql, params=()):
+    conn.execute(sql, params)
 
 
 # ── Routes ──────────────────────────────────────────────────────────
 
 PER_PAGE = 10
-
 
 SORT_MAP = {
     "latest": "created_at DESC",
@@ -49,12 +90,13 @@ def post_list():
 
     if query:
         like = f"%{query}%"
-        total = conn.execute(
-            "SELECT COUNT(*) FROM posts WHERE title LIKE ? OR content LIKE ?",
-            (like, like),
-        ).fetchone()[0]
+        if PG:
+            cnt_sql = f"SELECT COUNT(*) as cnt FROM posts WHERE title ILIKE {PH} OR content ILIKE {PH}"
+        else:
+            cnt_sql = f"SELECT COUNT(*) as cnt FROM posts WHERE title LIKE {PH} OR content LIKE {PH}"
+        total = query_one(conn, cnt_sql, (like, like))["cnt"]
     else:
-        total = conn.execute("SELECT COUNT(*) FROM posts").fetchone()[0]
+        total = query_one(conn, "SELECT COUNT(*) as cnt FROM posts")["cnt"]
 
     total_pages = max(1, (total + PER_PAGE - 1) // PER_PAGE)
     page = max(1, min(page, total_pages))
@@ -62,15 +104,14 @@ def post_list():
 
     if query:
         like = f"%{query}%"
-        posts = conn.execute(
-            f"SELECT * FROM posts WHERE title LIKE ? OR content LIKE ? ORDER BY {order_by} LIMIT ? OFFSET ?",
-            (like, like, PER_PAGE, offset),
-        ).fetchall()
+        if PG:
+            sql = f"SELECT * FROM posts WHERE title ILIKE {PH} OR content ILIKE {PH} ORDER BY {order_by} LIMIT {PH} OFFSET {PH}"
+        else:
+            sql = f"SELECT * FROM posts WHERE title LIKE {PH} OR content LIKE {PH} ORDER BY {order_by} LIMIT {PH} OFFSET {PH}"
+        posts = query_all(conn, sql, (like, like, PER_PAGE, offset))
     else:
-        posts = conn.execute(
-            f"SELECT * FROM posts ORDER BY {order_by} LIMIT ? OFFSET ?",
-            (PER_PAGE, offset),
-        ).fetchall()
+        sql = f"SELECT * FROM posts ORDER BY {order_by} LIMIT {PH} OFFSET {PH}"
+        posts = query_all(conn, sql, (PER_PAGE, offset))
 
     conn.close()
     return render_template(
@@ -90,10 +131,7 @@ def write_post():
         content = request.form.get("content", "").strip()
         if title and content:
             conn = get_db()
-            conn.execute(
-                "INSERT INTO posts (title, content) VALUES (?, ?)",
-                (title, content),
-            )
+            execute(conn, f"INSERT INTO posts (title, content) VALUES ({PH}, {PH})", (title, content))
             conn.commit()
             conn.close()
             return redirect(url_for("post_list"))
@@ -103,9 +141,7 @@ def write_post():
 @app.route("/post/<int:post_id>")
 def post_detail(post_id):
     conn = get_db()
-    post = conn.execute(
-        "SELECT * FROM posts WHERE id = ?", (post_id,)
-    ).fetchone()
+    post = query_one(conn, f"SELECT * FROM posts WHERE id = {PH}", (post_id,))
     conn.close()
     if post is None:
         return redirect(url_for("post_list"))
@@ -115,9 +151,7 @@ def post_detail(post_id):
 @app.route("/post/<int:post_id>/edit", methods=["GET", "POST"])
 def edit_post(post_id):
     conn = get_db()
-    post = conn.execute(
-        "SELECT * FROM posts WHERE id = ?", (post_id,)
-    ).fetchone()
+    post = query_one(conn, f"SELECT * FROM posts WHERE id = {PH}", (post_id,))
     conn.close()
     if post is None:
         return redirect(url_for("post_list"))
@@ -126,10 +160,7 @@ def edit_post(post_id):
         content = request.form.get("content", "").strip()
         if title and content:
             conn = get_db()
-            conn.execute(
-                "UPDATE posts SET title = ?, content = ? WHERE id = ?",
-                (title, content, post_id),
-            )
+            execute(conn, f"UPDATE posts SET title = {PH}, content = {PH} WHERE id = {PH}", (title, content, post_id))
             conn.commit()
             conn.close()
             return redirect(url_for("post_detail", post_id=post_id))
@@ -139,7 +170,7 @@ def edit_post(post_id):
 @app.route("/post/<int:post_id>/delete", methods=["POST"])
 def delete_post(post_id):
     conn = get_db()
-    conn.execute("DELETE FROM posts WHERE id = ?", (post_id,))
+    execute(conn, f"DELETE FROM posts WHERE id = {PH}", (post_id,))
     conn.commit()
     conn.close()
     return redirect(url_for("post_list"))
